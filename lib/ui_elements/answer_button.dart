@@ -13,7 +13,7 @@ class AnswerButton extends StatelessWidget {
       child: new Material(
         color: _answer==true ?  Colors.greenAccent : Colors.redAccent,
         child: new InkWell(
-          onTap: () => print("You Answered" + _answer.toString()),
+          onTap: _onTap,
           child: new Center(
             child: new Container(
               padding: new EdgeInsets.all(10.0),

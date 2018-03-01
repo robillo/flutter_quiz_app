@@ -13,6 +13,36 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
+
+  String _questionText;
+  int _questionNumber;
+  bool _isCorrect;
+
+  Question _currentQuestion;
+  Quiz _quiz = new Quiz([
+    new Question("Elon musk is the iron man", true),
+    new Question("Robin Kamboj is God", true),
+    new Question("Khattar is not a dawg", false)
+  ]);
+
+  bool _overlayShouldBeVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentQuestion = _quiz.nextQuestion;
+    _questionText = _currentQuestion.question;
+    _questionNumber = _quiz.questionNumber;
+  }
+
+  void handleAnswer(bool answer) {
+    _isCorrect = (_currentQuestion.answer == answer);
+    _quiz.answer(_isCorrect);
+    this.setState(() {
+      _overlayShouldBeVisible = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Stack(
@@ -20,12 +50,12 @@ class QuizPageState extends State<QuizPage> {
       children: <Widget>[
         new Column(
             children: <Widget>[
-              new AnswerButton(true, () => print("You Pressed True")),
-              new QuestionText(new Question("Robin Is Awesome", true), 1),
-              new AnswerButton(false, () => print("You Pressed False")),
+              new AnswerButton(true, () => handleAnswer(true)),
+              new QuestionText(_questionText, _questionNumber),
+              new AnswerButton(false, () => handleAnswer(false)),
             ],
         ),
-        new CorrectWrongOverlay(true)
+        _overlayShouldBeVisible == true ? new CorrectWrongOverlay(_isCorrect) : new Container()
       ],
     );
   }

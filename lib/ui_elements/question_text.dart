@@ -5,7 +5,7 @@ import '../utils/quiz.dart';
 
 class QuestionText extends StatefulWidget {
 
-  final Question _question;
+  final String _question;
   final int _questionNumber;
 
   QuestionText(this._question, this._questionNumber);
@@ -42,7 +42,7 @@ class QuestionTextState extends State<QuestionText> with SingleTickerProviderSta
         padding: new EdgeInsets.symmetric(vertical: 20.0),
         child: new Center(
           child: new Text(
-              "Statement " + widget._questionNumber.toString() + ": " + widget._question.question,
+              "Statement " + widget._questionNumber.toString() + ": " + widget._question,
               style: new TextStyle(fontSize: _fontSizeAnimation.value * 20),
           ),
         ),
