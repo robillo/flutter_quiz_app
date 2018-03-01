@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../ui_elements/answer_button.dart';
 import '../ui_elements/question_text.dart';
+import '../ui_elements/correct_wrong_overlay.dart';
 
 import '../utils/question.dart';
 import '../utils/quiz.dart';
@@ -15,6 +16,7 @@ class QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return new Stack(
+      fit: StackFit.expand,
       children: <Widget>[
         new Column(
             children: <Widget>[
@@ -23,6 +25,7 @@ class QuizPageState extends State<QuizPage> {
               new AnswerButton(false, () => print("You Pressed False")),
             ],
         ),
+        new CorrectWrongOverlay(true)
       ],
     );
   }
