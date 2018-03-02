@@ -22,6 +22,15 @@ class QuestionTextState extends State<QuestionText> with SingleTickerProviderSta
   AnimationController _fontSizeAnimationController;
 
   @override
+  void didUpdateWidget(QuestionText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if(oldWidget._question!=widget._question) {
+      _fontSizeAnimationController.reset();
+      _fontSizeAnimationController.forward();
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     _fontSizeAnimationController = new AnimationController(duration: new Duration(milliseconds: 1000), vsync: this);

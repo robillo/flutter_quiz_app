@@ -4,8 +4,9 @@ import 'dart:math';
 class CorrectWrongOverlay extends StatefulWidget {
 
   final bool isCorrect;
+  final VoidCallback _onTap;
 
-  CorrectWrongOverlay(this.isCorrect);
+  CorrectWrongOverlay(this.isCorrect, this._onTap);
 
   @override
   State<StatefulWidget> createState() {
@@ -24,8 +25,8 @@ class CorrectWrongState extends State<CorrectWrongOverlay> with SingleTickerProv
     _iconAnimationController = new AnimationController(duration: new Duration(seconds: 2), vsync: this);
     _iconAnimation = new CurvedAnimation(parent: _iconAnimationController, curve: Curves.elasticOut);
     _iconAnimation.addListener(
-            ()=>this.setState(
-              () => {}
+            () => this.setState(
+                    () => {}
             ));
     _iconAnimationController.forward();
   }
@@ -35,7 +36,7 @@ class CorrectWrongState extends State<CorrectWrongOverlay> with SingleTickerProv
     return new Material(
       color: Colors.black54,
       child: new InkWell(
-        onTap: () => print("You Pressed Overlay"),
+        onTap: () => widget._onTap,
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
