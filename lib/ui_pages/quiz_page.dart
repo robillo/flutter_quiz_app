@@ -65,6 +65,7 @@ class QuizPageState extends State<QuizPage> {
                     _questionNumber = _quiz.questionNumber;
                 });
             }
+//              () => print("on tap pressed")
         ) : new Container()
       ],
     );
