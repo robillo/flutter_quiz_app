@@ -32,6 +32,12 @@ class CorrectWrongState extends State<CorrectWrongOverlay> with SingleTickerProv
   }
 
   @override
+  void dispose() {
+    _iconAnimationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Material(
       color: Colors.black54,

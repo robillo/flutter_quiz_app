@@ -6,6 +6,7 @@ import '../ui_elements/correct_wrong_overlay.dart';
 
 import '../utils/question.dart';
 import '../utils/quiz.dart';
+import '../ui_pages/score_page.dart';
 
 class QuizPage extends StatefulWidget {
   @override
@@ -58,6 +59,11 @@ class QuizPageState extends State<QuizPage> {
         _overlayShouldBeVisible == true ? new CorrectWrongOverlay(
             _isCorrect,
             () {
+                if(_quiz.length == _questionNumber)
+                  Navigator.of(context).pushAndRemoveUntil(
+                      new MaterialPageRoute(builder: (BuildContext context) => new ScorePage(_quiz.score, _quiz.length)),
+                      (Route route) => route == null
+                  );
                 _currentQuestion = _quiz.nextQuestion;
                 this.setState(() {
                     _overlayShouldBeVisible = false;
